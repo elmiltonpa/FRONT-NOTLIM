@@ -1,0 +1,47 @@
+program Normalizacion;
+	def A:matriz[3][2];i:real;j:real;fila:real;columna:real;min:real;max:real;rango:real;aux:real;
+
+{
+	fila:=filas(A);
+	columna:=columnas(A);
+
+	A := [[5,1],[5,3],[5,7]];
+	j:=1;
+	
+	while ( ? j <= columna ? ) {
+		min := A[1][j];
+		max := A[1][j];
+		
+		i:=2;
+		
+		while ( ? i <= fila ? ) {
+			if ( ? A[i][j] < min ? ) {
+				min:= A[i][j];
+			};
+			
+			if ( ? A[i][j] > max ? ) {
+				max := A[i][j];
+			};
+			
+			i := (i + 1);
+			
+		};
+		rango := (max - min);
+		if ( ? rango == 0 ? ) {
+			rango := 1;
+		};
+
+		i := 1;
+		while ( ? i <= fila ? ) {
+			aux:= A[i][j];
+			A[i][j] := ((aux - min) / rango);
+			i := (i + 1);
+		};
+		j := (j + 1);
+	
+	};
+
+	escribir(A);
+	
+
+}

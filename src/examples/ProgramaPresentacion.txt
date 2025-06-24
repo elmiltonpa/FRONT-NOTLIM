@@ -1,0 +1,26 @@
+program presentacion;
+	def A:matriz[3][2];B:matriz[3][2];i:real;j:real;sum:real;aux:real;
+{
+	A := [[3,4],[1,2],[4,7]];
+
+	i := 1;	
+
+	while ( ? i <= filas(A) ?) {
+		j:=1;
+		while ( ? j <= columnas(A) ?) {
+			aux := A[i][j];
+			sum := 0;
+			while ( ? aux > 0 ? ) {
+				sum := sum + aux;
+				aux := aux - 1 ;
+			};
+
+			B[i][j] := sum;
+			j := j + 1 ;
+		};
+		i := i+1;
+	};
+
+	escribir(B);
+	
+}

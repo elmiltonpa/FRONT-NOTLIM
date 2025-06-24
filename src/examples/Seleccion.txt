@@ -1,0 +1,26 @@
+program seleccion;
+	def A:matriz[1][6];i:real;j:real;temp:real;
+{
+	
+	A := [[3,1,-4,-55.55,3]]
+
+	i:=1;
+
+	while (? i <= (columnas(A) - 1) ? ) {
+		j:=1;
+		while (? j <= (columnas(A) - i) ? ) {
+			if ( ? A[1][j] > A[1][j+1] ? ){
+				temp := A[1][j];
+				A[1][j]:=A[1][j+1];
+				A[1][j+1] := temp;
+
+			};
+			j := j+1;
+
+
+		};
+		i:= i +1;
+
+	};
+	escribir(A);
+}
