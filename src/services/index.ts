@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const URL = import.meta.env.VITE_URL
+
 export const Ejecutar = async (codigo: string) => {
     try {
-        const response = await axios.post("http://localhost:3000/ejecutar", {
+        const response = await axios.post(URL + '/ejecutar', {
             codigo: codigo
         });
         return response.data;
