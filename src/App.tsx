@@ -3,6 +3,7 @@ import './App.css'
 import { Ejecutar } from './services';
 import { ejemplosCodigo } from './examples';
 import type { Ejemplo } from './examples';
+import { useCodeMirror } from './hooks/useCodeMirror';
 
 
 const validarFuncionesLectura = (codigo: string): { valido: boolean; error?: string } => {
@@ -63,11 +64,12 @@ export interface ResultadoEjecucion {
 }
 
 export default function App() {
-  const [codigo, setCodigo] = useState('// Escribe tu programa aquí\nprint("Hola mundo");');
+  const [codigo, setCodigo] = useState('');
   const [resultado, setResultado] = useState<ResultadoEjecucion | null>(null);
   const [ejecutando, setEjecutando] = useState(false);
   const [ejemplos] = useState<Ejemplo[]>(ejemplosCodigo);
 
+  const ref = useCodeMirror({ value: codigo, onChange: setCodigo });
 
   const ejecutarCodigo = async () => {
     if (!codigo.trim()) {
@@ -92,7 +94,6 @@ export default function App() {
     setEjecutando(true);
     setResultado(null);
 
-    // Simular delay de ejecución
     setTimeout(async () => {
       try {
         const resultado = await Ejecutar(codigo);
@@ -160,14 +161,17 @@ export default function App() {
               </div>
             </div>
 
-            <div className="p-4">
-              <textarea
-                value={codigo}
-                onChange={(e) => setCodigo(e.target.value)}
-                className="text-black w-full h-64 p-3 border border-gray-300 rounded-md font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Escribe tu código aquí..."
-                spellCheck={false}
-              />
+            <div
+              ref={ref}
+              className="border border-gray-300"
+              style={{
+                minHeight: "200px",
+                width: "100%",
+                textAlign: "left",
+                overflow: "auto",
+                fontFamily: "monospace",
+                fontSize: "14px"
+              }} >
             </div>
 
             {/* Ejemplos */}
