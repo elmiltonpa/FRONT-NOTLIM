@@ -194,14 +194,14 @@ export default function App() {
           </div>
 
           {/* Resultados */}
-          <div className="bg-white rounded-lg shadow-md">
+          <div className="bg-white rounded-lg shadow-md flex flex-col h-full">
             <div className="border-b border-gray-200 p-4">
               <h2 className="text-lg font-semibold text-gray-900">
                 Resultados de Ejecución
               </h2>
             </div>
 
-            <div className="p-4">
+            <div className="p-4 min-h-max flex-1">
               {ejecutando && (
                 <div className="flex items-center justify-center p-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
@@ -210,7 +210,7 @@ export default function App() {
               )}
 
               {resultado && !ejecutando && (
-                <div className="space-y-4">
+                <div className="space-y-4 flex flex-col h-full">
                   {/* Estado de ejecución */}
                   <div className={`flex items-center p-3 rounded-md ${
                     resultado.exito 
@@ -239,11 +239,13 @@ export default function App() {
 
                   {/* Salida */}
                   {resultado.salida && resultado.salida.length > 0 && (
-                    <div className="bg-gray-50 border border-gray-200 rounded-md p-3">
+                    <div className="bg-gray-50 border border-gray-200 rounded-md p-3 flex-1 flex flex-col">
                       <h4 className="font-medium text-gray-800 mb-2">Salida:</h4>
-                      <pre className="text-sm text-gray-700 whitespace-pre-wrap font-mono">
-                        {resultado.salida.join('\n')}
-                      </pre>
+                      <div className="overflow-x-auto overflow-y-auto flex-1">
+                        <pre className="text-sm text-gray-700 whitespace-pre font-mono min-w-max py-2 px-1">
+                          {resultado.salida.join('\n')}
+                        </pre>
+                      </div>
                     </div>
                   )}
                 </div>
