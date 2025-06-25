@@ -96,7 +96,9 @@ export default function App() {
 
     setTimeout(async () => {
       try {
+
         const resultado = await Ejecutar(codigo);
+
         setResultado(resultado);
       } catch (error) {
         setResultado({
